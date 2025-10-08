@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://boydo7gqbcv4a"]
+
+[ext_resource type="PackedScene" uid="uid://ddfg1oshkhfak" path="res://input_method_card.tscn" id="1_cd7ck"]
+
+[node name="PlayerJoinScreen" type="Node2D"]
+
+[node name="InputMethodCard" parent="." instance=ExtResource("1_cd7ck")]
+offset_left = -238.0
+offset_top = -120.0
+offset_right = -105.0
+offset_bottom = 130.0
+input_type = "wasd"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3.62, 3.62)

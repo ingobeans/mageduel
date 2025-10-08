@@ -12,6 +12,11 @@
 [ext_resource type="Script" uid="uid://nc5bfedvnpgm" path="res://addons/rmsmartshape/materials/shape_material.gd" id="10_6p4q2"]
 [ext_resource type="PackedScene" uid="uid://8mmx7fnhpfoa" path="res://player.tscn" id="11_1vpcs"]
 
+[sub_resource type="Resource" id="Resource_1s3fb"]
+script = ExtResource("2_uvldv")
+position = Vector2(-1, 0)
+texture_idx = 2
+
 [sub_resource type="Resource" id="Resource_mqgew"]
 script = ExtResource("2_uvldv")
 position = Vector2(-1, 0)
@@ -43,11 +48,6 @@ texture_idx = 3
 script = ExtResource("2_uvldv")
 position = Vector2(300.04242, 6.8083344)
 
-[sub_resource type="Resource" id="Resource_1s3fb"]
-script = ExtResource("2_uvldv")
-position = Vector2(-1, 0)
-texture_idx = 2
-
 [sub_resource type="Resource" id="Resource_jlld2"]
 script = ExtResource("3_nb1nt")
 _points = {
@@ -64,7 +64,7 @@ _point_order = PackedInt32Array(1, 65, 83, 81, 77, 79, 82, 0)
 _constraints = {
 Vector2i(1, 0): 15
 }
-_next_key = 100
+_next_key = 105
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_u73fl"]
 _surfaces = [{
@@ -85,7 +85,7 @@ texture = ExtResource("5_w3v2p")
 mesh = SubResource("ArrayMesh_u73fl")
 z_index = -10
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_3vubs"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_g8a64"]
 _surfaces = [{
 "aabb": AABB(-1, -0.1414752, 0, 301.04242, 100.795586, 1e-05),
 "attribute_data": PackedByteArray("/////wAAAAAAAAAAAAAAAAAAAAD/////AAAAAAAAgD8AAAAAAACAP/////9bTpdBAACAP1tOl0EAAIA//////1tOl0EAAAAAW06XQQAAAAD/////W06XQQAAgD9bTpdBAACAP/////+CuppBAACAP4K6mkEAAIA//////4K6mkEAAAAAgrqaQQAAAAD/////grqaQQAAgD+CuppBAACAP//////u4rJBAACAP+7iskEAAIA//////+7iskEAAAAA7uKyQQAAAAD/////7uKyQQAAgD/u4rJBAACAP/////9Bef1BAACAP0F5/UEAAIA//////0F5/UEAAAAAQXn9QQAAAAD/////QXn9QQAAgD9Bef1BAACAP/////8ytyJCAACAPzK3IkIAAIA//////zK3IkIAAAAAMrciQgAAAAD/////MrciQgAAgD8ytyJCAACAP/////8P6S5CAACAPw/pLkIAAIA//////w/pLkIAAAAAD+kuQgAAAAD/////D+kuQgAAgD8P6S5CAACAP/////8AADBCAACAPwAAMEIAAIA//////wAAMEIAAAAAAAAwQgAAAAA="),
@@ -102,10 +102,10 @@ _surfaces = [{
 diffuse_texture = ExtResource("6_1s3fb")
 texture_repeat = 2
 
-[sub_resource type="Resource" id="Resource_6p4q2"]
+[sub_resource type="Resource" id="Resource_1pekq"]
 script = ExtResource("4_u834y")
 texture = SubResource("CanvasTexture_wheaq")
-mesh = SubResource("ArrayMesh_3vubs")
+mesh = SubResource("ArrayMesh_g8a64")
 
 [sub_resource type="Resource" id="Resource_qxpgd"]
 script = ExtResource("8_ffcej")
@@ -140,7 +140,7 @@ position = Vector2(-218, -1)
 [node name="SS2D_Shape" type="Node2D" parent="StaticBody2D"]
 script = ExtResource("1_g8a64")
 _points = SubResource("Resource_jlld2")
-_meshes = Array[ExtResource("4_u834y")]([SubResource("Resource_8t24w"), SubResource("Resource_6p4q2")])
+_meshes = Array[ExtResource("4_u834y")]([SubResource("Resource_8t24w"), SubResource("Resource_1pekq")])
 shape_material = SubResource("Resource_4j635")
 collision_polygon_node_path = NodePath("../CollisionPolygon2D")
 metadata/_custom_type_script = "uid://dhdc4b8yddyej"
@@ -150,6 +150,10 @@ visible = false
 polygon = PackedVector2Array(-1, 0, 300, 0, 300.04242, 6.8083344, 287.4123, 53.177383, 146.83315, 100.65411, 12.603302, 50.916626, -0.9718323, 4.3351417)
 
 [node name="PlayerBody" parent="." instance=ExtResource("11_1vpcs")]
+position = Vector2(-177.575, -8)
+player_one = true
+
+[node name="PlayerBody2" parent="." instance=ExtResource("11_1vpcs")]
 position = Vector2(40, -8)
 
 [node name="Camera2D" type="Camera2D" parent="."]

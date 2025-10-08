@@ -1,0 +1,27 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddfg1oshkhfak"]
+
+[ext_resource type="Script" uid="uid://bvlah5mfloq01" path="res://input_method_card.gd" id="1_7id1e"]
+
+[node name="InputMethodCard" type="Panel"]
+offset_right = 133.0
+offset_bottom = 250.0
+script = ExtResource("1_7id1e")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 445.26752
+offset_bottom = 137.0
+scale = Vector2(0.296451, 0.296451)
+theme_override_font_sizes/font_size = 100
+text = "WASD"
+horizontal_alignment = 1
+
+[node name="ActionText" type="Label" parent="."]
+layout_mode = 0
+offset_top = 66.0
+offset_right = 445.26752
+offset_bottom = 203.0
+scale = Vector2(0.296451, 0.296451)
+theme_override_font_sizes/font_size = 35
+text = "Join with 'W (Physical)'"
+horizontal_alignment = 1
