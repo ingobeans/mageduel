@@ -1,9 +1,9 @@
 extends "res://weapon.gd"
 
-@export var fireball_instance: PackedScene
+@export var projectile: PackedScene
 
 func use(direction: Vector2):
-	var new = fireball_instance.instantiate()
+	var new = projectile.instantiate()
 	new.position = global_position
 	new.direction = direction
 	new.parent = get_parent().get_parent().get_parent()

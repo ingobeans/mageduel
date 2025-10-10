@@ -12,4 +12,5 @@ func _process(_delta: float) -> void:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	var delta = body.position - position
-	body.velocity += delta.normalized() / delta.length_squared() * knockback
+	var dist = max(delta.length(),30.0)
+	body.velocity += delta.normalized() / dist * knockback

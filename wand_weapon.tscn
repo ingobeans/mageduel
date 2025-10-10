@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://cm8cvpebeajna"]
+
+[ext_resource type="Texture2D" uid="uid://pnhosq74qvh6" path="res://assets/weapons/wand.png" id="1_h3j0o"]
+[ext_resource type="Script" uid="uid://lds5wuq41n1o" path="res://projectile_weapon.gd" id="2_thusd"]
+[ext_resource type="PackedScene" uid="uid://2uydran6205u" path="res://magicbolt.tscn" id="3_lerly"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_thusd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_h3j0o")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Wand" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_thusd")
+autoplay = "default"
+script = ExtResource("2_thusd")
+projectile = ExtResource("3_lerly")
+use_delay = 0.65
