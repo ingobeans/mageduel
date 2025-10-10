@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://uyxox6axyyqm"]
+
+[ext_resource type="SpriteFrames" uid="uid://d2fe1r6nhe17r" path="res://assets/weapons/fireball.tres" id="1_uocw6"]
+[ext_resource type="Script" uid="uid://dbjl8ya8dc2gf" path="res://fireball_instance.gd" id="2_vad03"]
+[ext_resource type="PackedScene" uid="uid://cteegsbtgo3ad" path="res://explosion.tscn" id="3_uyh66"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vad03"]
+size = Vector2(7, 9)
+
+[node name="FireballInstance" type="AnimatedSprite2D"]
+sprite_frames = ExtResource("1_uocw6")
+autoplay = "default"
+frame_progress = 0.84582955
+script = ExtResource("2_vad03")
+explosion_particle = ExtResource("3_uyh66")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-0.5, 1.5)
+shape = SubResource("RectangleShape2D_vad03")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

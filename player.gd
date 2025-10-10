@@ -7,15 +7,25 @@ var gravity = 600.0
 var jump_force = 80.0
 var max_jump_length = 0.25
 
+@export var weapons: Array[PackedScene]
+
 var jump_counter = 0.0
 
 @export var player_one = false
 var input_set = "player1"
 
+var weapon: Node2D
+
 func _ready() -> void:
 	input_set = "player1" if player_one else "player2"
 	if !player_one:
-		$Sprite.texture = load("res://assets/player2.png")
+		$Flipped/Sprite.texture = load("res://assets/player2.png")
+	else: 
+		$Flipped.scale.x = -1
+	
+	var w = weapons[randi() % weapons.size()]
+	$Flipped/Hand.add_child(w.instantiate())
+	weapon = $Flipped/Hand.get_child(0)
 
 func _process(delta: float) -> void:
 	var on_ground = is_on_floor()
@@ -28,6 +38,12 @@ func _process(delta: float) -> void:
 			jump_counter -= delta
 	else:
 		jump_counter = 0.0
+		
+	if Input.is_action_just_pressed(input_set + " attack"):
+		var direction = Vector2(Input.get_axis(input_set + " left",input_set + " right"), Input.get_axis(input_set + " up",input_set + " down"))
+		if direction.length() == 0.0:
+			direction = Vector2(-$Flipped.scale.x,0.0)
+		weapon.try_use(direction)
 
 func _physics_process(delta: float) -> void:
 	var on_ground = is_on_floor()
@@ -45,9 +61,9 @@ func _physics_process(delta: float) -> void:
 		active_friction = 0
 	
 	if move_dir > 0:
-		$Sprite.flip_h = true
+		$Flipped.scale.x = -1
 	elif move_dir < 0:
-		$Sprite.flip_h = false
+		$Flipped.scale.x = 1
 	
 		
 	if velocity.x - acceleration * delta < -max_speed and move_dir < 0:
