@@ -1,7 +1,7 @@
 extends AnimatedSprite2D
 
 var finished = false
-var knockback = 90.0
+var knockback = 1.12 / 0.037
 var damage = 20.0
 
 var position_offset = Vector2(0.0,0.0)

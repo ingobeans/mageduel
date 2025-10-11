@@ -22,7 +22,11 @@ func add_damage(amount:float):
 	damage += amount
 	
 func knockback(direction:Vector2,strength:float):
-	velocity += direction * strength * damage
+	var s = (0.1 * pow(strength,damage) + 5*strength*damage)
+	print("strength: ", strength)
+	print("damage: ", damage)
+	print("0.1 * strength ** damage == ", 0.1 * strength ** damage)
+	velocity += direction * s
 
 func _ready() -> void:
 	input_set = "player1" if player_one else "player2"
@@ -46,6 +50,7 @@ func _process(delta: float) -> void:
 			jump_counter -= delta
 	else:
 		jump_counter = 0.0
+		
 		
 	if Input.is_action_just_pressed(input_set + " attack"):
 		var direction = Vector2(Input.get_axis(input_set + " left",input_set + " right"), Input.get_axis(input_set + " up",input_set + " down"))
