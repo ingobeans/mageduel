@@ -8,7 +8,7 @@ var jump_force = 80.0
 var max_jump_length = 0.25
 
 var damage = 0.0
-var double_jump = false
+var double_jump = 2
 
 @export var weapons: Array[PackedScene]
 
@@ -51,18 +51,19 @@ func _process(delta: float) -> void:
 			jump_counter -= delta
 	else:
 		jump_counter = 0.0
-	if Input.is_action_just_pressed(input_set + " jump") and !on_ground and jump_counter == 0.0 and double_jump:
-		double_jump = false
+	if Input.is_action_just_pressed(input_set + " jump") and !on_ground and jump_counter == 0.0 and double_jump > 0:
+		double_jump -= 1
 		var dir = Input.get_axis(input_set + " left",input_set + " right")
 		if dir == 0.0:
-			velocity.y = -jump_force * 2.65
+			velocity.y = -jump_force * 2.95
+			velocity.x = lerp(velocity.x,0.0,0.6)
 		else:
-			velocity.y = -jump_force * 2.35
-			velocity.x = dir * jump_force
+			velocity.y = -jump_force * 2.65
+			velocity.x = dir * jump_force * 1.5
 			
 		
 	if on_ground:
-		double_jump = true
+		double_jump = 2
 		
 		
 	if Input.is_action_just_pressed(input_set + " attack"):
