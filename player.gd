@@ -1,11 +1,13 @@
 extends CharacterBody2D
 
 var max_walk_speed = 100
-var acceleration = 165.0 * 10
+var acceleration = 165.0 * 2
 var friction = 3.0
 var gravity = 600.0
 var jump_force = 80.0
 var max_jump_length = 0.25
+
+var damage = 0.0
 
 @export var weapons: Array[PackedScene]
 
@@ -15,6 +17,12 @@ var jump_counter = 0.0
 var input_set = "player1"
 
 var weapon: Node2D
+
+func add_damage(amount:float):
+	damage += amount
+	
+func knockback(direction:Vector2,strength:float):
+	velocity += direction * strength * damage
 
 func _ready() -> void:
 	input_set = "player1" if player_one else "player2"
@@ -67,9 +75,11 @@ func _physics_process(delta: float) -> void:
 	
 		
 	if velocity.x - acceleration * delta < -max_speed and move_dir < 0:
-		velocity.x = -max_speed
+		pass
+		#velocity.x = -max_speed
 	elif velocity.x + acceleration * delta > max_speed and move_dir > 0:
-		velocity.x = max_speed
+		pass
+		#velocity.x = max_speed
 	else:
 		velocity.x += move_dir * acceleration * delta
 	

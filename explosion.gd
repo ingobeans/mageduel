@@ -1,7 +1,14 @@
 extends AnimatedSprite2D
 
 var finished = false
-var knockback = 9000.0
+var knockback = 90.0
+var damage = 20.0
+
+var position_offset = Vector2(0.0,0.0)
+
+var test: PackedScene = load("res://test.tscn")
+
+var hit = []
 
 func _process(_delta: float) -> void:
 	if frame >= sprite_frames.get_frame_count("default") - 1:
@@ -11,6 +18,10 @@ func _process(_delta: float) -> void:
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	var delta = body.position - position
-	var dist = max(delta.length(),30.0)
-	body.velocity += delta.normalized() / dist * knockback
+	if !hit.has(body):
+		hit.append(body)
+	
+		var delta = body.position - position + position_offset
+		var dist = max(delta.length(),30.0)
+		body.knockback(delta.normalized(), knockback / dist)
+		body.add_damage(damage)

@@ -20,4 +20,4 @@ sprite_frames = SubResource("SpriteFrames_thusd")
 autoplay = "default"
 script = ExtResource("2_thusd")
 projectile = ExtResource("3_lerly")
-use_delay = 0.65
+use_delay = 0.45
