@@ -10,6 +10,9 @@ var max_jump_length = 0.25
 var damage = 0.0
 var double_jump = 2
 
+@export var player1_shield: Color
+@export var player2_shield: Color
+
 @export var weapons: Array[PackedScene]
 
 var jump_counter = 0.0
@@ -19,20 +22,28 @@ var input_set = "player1"
 
 var weapon: Node2D
 
+@onready var shield = $Flipped/Shield
+
 func add_damage(amount:float):
+	if shield.visible:
+		return
 	damage += amount
 	
 func knockback(direction:Vector2,strength:float):
+	if shield.visible:
+		return
 	var dmg = max(10.0,damage)
 	var s = (0.1 * pow(strength,dmg) + 5*strength*dmg)
 	velocity += direction * s
 
 func _ready() -> void:
 	input_set = "player1" if player_one else "player2"
-	if !player_one:
-		$Flipped/Sprite.texture = load("res://assets/player2.png")
-	else: 
+	if player_one:
 		$Flipped.scale.x = -1
+		shield.set_instance_shader_parameter("shield_color",player1_shield)
+	else: 
+		$Flipped/Sprite.texture = load("res://assets/player2.png")
+		shield.set_instance_shader_parameter("shield_color",player2_shield)
 	
 	var w = weapons[randi() % weapons.size()]
 	$Flipped/Hand.add_child(w.instantiate())
@@ -40,6 +51,13 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	var on_ground = is_on_floor()
+	var dir = Input.get_axis(input_set + " left",input_set + " right")
+	if Input.is_action_pressed(input_set + " down") and dir == 0.0 and on_ground:
+		shield.visible = true
+	else:
+		shield.visible = false
+	
+	
 	if Input.is_action_pressed(input_set + " jump"):
 		if on_ground:
 			velocity.y = -jump_force * 1.25
@@ -51,7 +69,6 @@ func _process(delta: float) -> void:
 		jump_counter = 0.0
 	if Input.is_action_just_pressed(input_set + " jump") and !on_ground and jump_counter == 0.0 and double_jump > 0:
 		double_jump -= 1
-		var dir = Input.get_axis(input_set + " left",input_set + " right")
 		if dir == 0.0:
 			velocity.y = -jump_force * 2.95
 			velocity.x = lerp(velocity.x,0.0,0.6)
@@ -65,7 +82,7 @@ func _process(delta: float) -> void:
 		
 		
 	if Input.is_action_just_pressed(input_set + " attack"):
-		var direction = Vector2(Input.get_axis(input_set + " left",input_set + " right"), Input.get_axis(input_set + " up",input_set + " down"))
+		var direction = Vector2(dir, Input.get_axis(input_set + " up",input_set + " down"))
 		if direction.length() == 0.0:
 			direction = Vector2(-$Flipped.scale.x,0.0)
 		weapon.try_use(direction)
