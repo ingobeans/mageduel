@@ -5,16 +5,23 @@ extends Control
 @export var player2_portrait: Texture2D
 
 @export var names: Array[String]
+@export var titles: Array[String]
 
 @onready var mana_bar = $ManaFilled
 var max_mana_width: float
 
 func gen_name()->String:
-	return names[randi() % names.size()]
+	var n = names[randi() % names.size()]
+	if randf() < 0.5:
+		var t = titles[randi() % titles.size()]
+		n += " " + t
+	return n
 
 func _ready() -> void:
 	max_mana_width = mana_bar.size.x
-	$Label.text = gen_name()
+	var n = gen_name()
+	$Label.text = n
+	$Label.add_theme_font_size_override("font_size",min(256.0 / n.length() * 10.0,256.0))
 	if player.player_one:
 		$Portrait.texture = player1_portrait
 	else:
