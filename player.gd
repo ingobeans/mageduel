@@ -6,6 +6,9 @@ var friction = 3.0
 var gravity = 600.0
 var jump_force = 80.0
 var max_jump_length = 0.25
+var shield_drain_speed = 25.0
+
+var mana_charge_speed = 5.0
 
 var damage = 0.0
 var double_jump = 2
@@ -15,7 +18,10 @@ var double_jump = 2
 
 @export var weapons: Array[PackedScene]
 
+var mana = 100.0
 var jump_counter = 0.0
+var mana_charge_delay = 1.0
+var last_mana_use_counter = 0.0
 
 @export var player_one = false
 var input_set = "player1"
@@ -52,11 +58,14 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	var on_ground = is_on_floor()
 	var dir = Input.get_axis(input_set + " left",input_set + " right")
-	if Input.is_action_pressed(input_set + " down") and dir == 0.0 and on_ground:
+	if Input.is_action_pressed(input_set + " down") and dir == 0.0 and on_ground and mana > 0.0:
 		shield.visible = true
+		mana -= delta * shield_drain_speed
+		last_mana_use_counter = mana_charge_delay
 	else:
 		shield.visible = false
 	
+	mana += delta * mana_charge_speed * (7.0 if last_mana_use_counter <= 0.0 else 1.0)
 	
 	if Input.is_action_pressed(input_set + " jump"):
 		if on_ground:
@@ -81,11 +90,16 @@ func _process(delta: float) -> void:
 		double_jump = 2
 		
 		
-	if Input.is_action_just_pressed(input_set + " attack"):
+	if Input.is_action_just_pressed(input_set + " attack") and mana >= weapon.mana_cost:
 		var direction = Vector2(dir, Input.get_axis(input_set + " up",input_set + " down"))
 		if direction.length() == 0.0:
 			direction = Vector2(-$Flipped.scale.x,0.0)
-		weapon.try_use(direction)
+		if weapon.try_use(direction):
+			mana -= weapon.mana_cost
+			last_mana_use_counter = mana_charge_delay
+	
+	last_mana_use_counter -= delta
+	mana = clamp(mana,0.0,100.0)
 
 func _physics_process(delta: float) -> void:
 	var on_ground = is_on_floor()

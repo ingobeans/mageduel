@@ -21,3 +21,4 @@ autoplay = "default"
 script = ExtResource("2_thusd")
 projectile = ExtResource("3_lerly")
 use_delay = 0.45
+mana_cost = 10.0
