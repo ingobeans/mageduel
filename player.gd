@@ -23,10 +23,8 @@ func add_damage(amount:float):
 	damage += amount
 	
 func knockback(direction:Vector2,strength:float):
-	var s = (0.1 * pow(strength,damage) + 5*strength*damage)
-	print("strength: ", strength)
-	print("damage: ", damage)
-	print("0.1 * strength ** damage == ", 0.1 * strength ** damage)
+	var dmg = max(10.0,damage)
+	var s = (0.1 * pow(strength,dmg) + 5*strength*dmg)
 	velocity += direction * s
 
 func _ready() -> void:
