@@ -59,6 +59,10 @@ func _ready() -> void:
 		shield.set_instance_shader_parameter("shield_color",player2_shield)
 	
 	var w = weapons[randi() % weapons.size()]
+	if player_one:
+		w = weapons[0]
+	else:
+		w = weapons[2]
 	$Flipped/Hand.add_child(w.instantiate())
 	weapon = $Flipped/Hand.get_child(0)
 
