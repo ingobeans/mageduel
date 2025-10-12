@@ -371,3 +371,6 @@ offset_top = -160.0
 offset_right = 113.0
 offset_bottom = -160.0
 player = NodePath("../PlayerBody2")
+
+[node name="KillPlane" type="Node2D" parent="."]
+position = Vector2(-79, 389)

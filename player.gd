@@ -28,6 +28,7 @@ var input_set = "player1"
 
 var weapon: Node2D
 
+@onready var kill_plane = self.get_node("../KillPlane").position.y
 @onready var shield = $Flipped/Shield
 
 func add_damage(amount:float):
@@ -38,11 +39,6 @@ func add_damage(amount:float):
 func calc_knockback(strength,dmg):
 	var a = (dmg+strength)/10 + (dmg+strength)*strength/20
 	var b = 0.0000001676716 * strength * dmg**3.6665918572021
-	
-	if a > b:
-		print("a")
-	else:
-		print("b")
 	
 	return max(a,b)
 
@@ -56,7 +52,7 @@ func knockback(direction:Vector2,strength:float):
 func knockback_friendly(direction:Vector2,strength:float):
 	if shield.visible:
 		return
-	var dmg = 40.0
+	var dmg = 20.0
 	var s = calc_knockback(strength,dmg)
 	velocity += direction * s
 
@@ -74,6 +70,8 @@ func _ready() -> void:
 	weapon = $Flipped/Hand.get_child(0)
 
 func _process(delta: float) -> void:
+	if position.y >= kill_plane:
+		get_tree().reload_current_scene()
 	var on_ground = is_on_floor()
 	var dir = Input.get_axis(input_set + " left",input_set + " right")
 	if Input.is_action_pressed(input_set + " down") and dir == 0.0 and on_ground and mana > 0.0:

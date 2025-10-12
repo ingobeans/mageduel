@@ -1330,7 +1330,8 @@ func force_update() -> void:
 	if not _first_update or not _meshes:
 		_build_meshes()
 
-	_renderer.render(_meshes)
+	if _renderer != null:
+		_renderer.render(_meshes)
 	queue_redraw()  # Debug drawing
 	_update_click_rect()
 
