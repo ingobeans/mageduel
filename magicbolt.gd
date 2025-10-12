@@ -3,7 +3,7 @@ extends Sprite2D
 var direction: Vector2
 var parent: Node2D
 var speed = 200.0
-var knockback = 1.086
+var knockback = 30
 var damage = 6.0
 
 

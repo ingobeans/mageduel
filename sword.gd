@@ -1,6 +1,6 @@
 extends "res://weapon.gd"
 
-var knockback = 1.086
+var knockback = 30
 @onready var sprite = $Sprite
 @onready var hit_area = $HitArea
 @onready var deflect_area = $DeflectArea

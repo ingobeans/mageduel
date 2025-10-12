@@ -35,18 +35,29 @@ func add_damage(amount:float):
 		return
 	damage += amount
 	
+func calc_knockback(strength,dmg):
+	var a = (dmg+strength)/10 + (dmg+strength)*strength/20
+	var b = 0.0000001676716 * strength * dmg**3.6665918572021
+	
+	if a > b:
+		print("a")
+	else:
+		print("b")
+	
+	return max(a,b)
+
 func knockback(direction:Vector2,strength:float):
 	if shield.visible:
 		return
 	var dmg = max(10.0,damage)
-	var s = (0.1 * pow(strength,dmg) + 5*strength*dmg)
+	var s = calc_knockback(strength,dmg)
 	velocity += direction * s
 
 func knockback_friendly(direction:Vector2,strength:float):
 	if shield.visible:
 		return
 	var dmg = 40.0
-	var s = (0.1 * pow(strength,dmg) + 5*strength*dmg)
+	var s = calc_knockback(strength,dmg)
 	velocity += direction * s
 
 func _ready() -> void:
@@ -59,10 +70,6 @@ func _ready() -> void:
 		shield.set_instance_shader_parameter("shield_color",player2_shield)
 	
 	var w = weapons[randi() % weapons.size()]
-	if player_one:
-		w = weapons[0]
-	else:
-		w = weapons[2]
 	$Flipped/Hand.add_child(w.instantiate())
 	weapon = $Flipped/Hand.get_child(0)
 
