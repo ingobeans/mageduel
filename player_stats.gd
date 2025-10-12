@@ -8,6 +8,7 @@ extends Control
 @export var titles: Array[String]
 
 @onready var mana_bar = $ManaFilled
+@onready var percent = $Percent
 var max_mana_width: float
 
 func gen_name()->String:
@@ -21,7 +22,7 @@ func _ready() -> void:
 	max_mana_width = mana_bar.size.x
 	var n = gen_name()
 	$Label.text = n
-	$Label.add_theme_font_size_override("font_size",min(256.0 / n.length() * 10.0,256.0))
+	$Label.add_theme_font_size_override("font_size",min(-6 * n.length() + 316,256.0))
 	if player.player_one:
 		$Portrait.texture = player1_portrait
 	else:
@@ -29,3 +30,4 @@ func _ready() -> void:
 	
 func _process(_delta: float) -> void:
 	mana_bar.size.x = player.mana / 100.0 * max_mana_width
+	percent.text = str(player.damage)

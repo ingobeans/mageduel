@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=4 uid="uid://dst0s2f0wwhq8"]
+[gd_scene load_steps=50 format=4 uid="uid://dst0s2f0wwhq8"]
 
 [ext_resource type="Script" uid="uid://dhdc4b8yddyej" path="res://addons/rmsmartshape/shapes/shape.gd" id="1_g8a64"]
 [ext_resource type="Script" uid="uid://bwcf4pjgprn0k" path="res://addons/rmsmartshape/shapes/point.gd" id="2_uvldv"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dl0jcmjlywtc8" path="res://assets/grass.png" id="6_1s3fb"]
 [ext_resource type="Resource" uid="uid://cxeuadrro3i7p" path="res://ground.tres" id="7_yokb4"]
 [ext_resource type="PackedScene" uid="uid://ds2jvohfyuo6y" path="res://player_stats.tscn" id="9_35c7g"]
+[ext_resource type="PackedScene" uid="uid://b5pxl6wp5r2cb" path="res://player_oob.tscn" id="10_n068f"]
 [ext_resource type="PackedScene" uid="uid://8mmx7fnhpfoa" path="res://player.tscn" id="11_1vpcs"]
 
 [sub_resource type="Resource" id="Resource_1s3fb"]
@@ -344,15 +345,29 @@ position = Vector2(-65, -31)
 zoom = Vector2(3.62, 3.62)
 
 [node name="PlayerStats" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_35c7g")]
-offset_left = -284.0
+offset_left = -304.0
 offset_top = 89.0
-offset_right = -284.0
+offset_right = -304.0
 offset_bottom = 89.0
 player = NodePath("../PlayerBody")
 
 [node name="PlayerStats2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("9_35c7g")]
-offset_left = 60.0
+offset_left = 40.0
 offset_top = 89.0
-offset_right = 60.0
+offset_right = 40.0
 offset_bottom = 89.0
+player = NodePath("../PlayerBody2")
+
+[node name="PlayerOOB" parent="." node_paths=PackedStringArray("player") instance=ExtResource("10_n068f")]
+offset_left = 173.0
+offset_top = -160.0
+offset_right = 173.0
+offset_bottom = -160.0
+player = NodePath("../PlayerBody")
+
+[node name="PlayerOOB2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("10_n068f")]
+offset_left = 113.0
+offset_top = -160.0
+offset_right = 113.0
+offset_bottom = -160.0
 player = NodePath("../PlayerBody2")
