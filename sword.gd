@@ -29,8 +29,12 @@ var can_hit = false
 var waiting_to_hit = false
 
 func use(_direction: Vector2):
-	sprite.play("slashdown")
-	last_attack = sequence_time
+	if last_attack > 0.0:
+		last_attack = 0.0
+		sprite.play("slashup")
+	else:
+		sprite.play("slashdown")
+		last_attack = sequence_time
 	waiting_to_hit = true
 
 func _on_sprite_animation_finished() -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cvft8syv2bnju"]
+[gd_scene load_steps=15 format=3 uid="uid://cvft8syv2bnju"]
 
 [ext_resource type="Texture2D" uid="uid://cmrue51upe844" path="res://assets/weapons/magicsword.png" id="1_i0b2m"]
 [ext_resource type="Script" uid="uid://benn6f5bqte2y" path="res://sword.gd" id="2_jqkvv"]
@@ -7,6 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://1shvebcx4nj3" path="res://assets/weapons/magicsword4.png" id="4_w6psv"]
 [ext_resource type="Texture2D" uid="uid://c1ikcbknig5yq" path="res://assets/weapons/magicsword5.png" id="5_7upi4"]
 [ext_resource type="Texture2D" uid="uid://ctbc5dcn48be5" path="res://assets/weapons/magicsword6.png" id="6_bq6se"]
+[ext_resource type="Texture2D" uid="uid://b6ore8xkirt0r" path="res://assets/weapons/magicsword7.png" id="8_w6psv"]
+[ext_resource type="Texture2D" uid="uid://confjggxrvqa6" path="res://assets/weapons/magicsword8.png" id="9_7upi4"]
+[ext_resource type="Texture2D" uid="uid://dycef62argi6k" path="res://assets/weapons/magicsword9.png" id="10_bq6se"]
+[ext_resource type="Texture2D" uid="uid://4wvwgismegeg" path="res://assets/weapons/magicsword10.png" id="11_7upi4"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_m4hmt"]
 animations = [{
@@ -36,6 +40,23 @@ animations = [{
 }],
 "loop": false,
 "name": &"slashdown",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 0.11,
+"texture": ExtResource("8_w6psv")
+}, {
+"duration": 0.11,
+"texture": ExtResource("9_7upi4")
+}, {
+"duration": 0.05,
+"texture": ExtResource("10_bq6se")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_7upi4")
+}],
+"loop": false,
+"name": &"slashup",
 "speed": 2.0
 }]
 
