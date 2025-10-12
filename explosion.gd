@@ -7,6 +7,7 @@ var position_offset = Vector2(0.0,0.0)
 
 var test: PackedScene = load("res://test.tscn")
 
+var parent: Node2D
 var hit = []
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
@@ -15,8 +16,11 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	
 		var delta = body.position - position + position_offset
 		var dist = max(delta.length(),30.0)
-		body.knockback(delta.normalized(), knockback / dist)
-		body.add_damage(damage)
+		if body != parent:
+			body.knockback(delta.normalized(), knockback / dist)
+			body.add_damage(damage)
+		else:
+			body.knockback_friendly(delta.normalized(), knockback / dist)
 
 
 func _on_animation_finished() -> void:

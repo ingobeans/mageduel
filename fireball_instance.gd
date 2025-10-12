@@ -13,5 +13,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body != parent:
 		var explosion = explosion_particle.instantiate()
 		explosion.position = global_position
+		explosion.parent = parent
 		get_tree().root.add_child(explosion)
 		queue_free()

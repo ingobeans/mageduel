@@ -7,7 +7,7 @@ void vertex() {
 }
 void fragment() {
 	float radius = 0.3;
-	float border = 0.01;
+	float border = 0.02;
 
 	vec3 c = shield_color.rgb;
 	float v = length(UV.xy - vec2(0.5,0.5));

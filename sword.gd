@@ -17,6 +17,7 @@ func weapon_process(delta:float):
 		for body in bodies:
 			if body != player:
 				body.knockback(Vector2(-player_flipped.scale.x,0),knockback)
+				body.add_damage(6.5)
 				can_hit = false
 		var areas = deflect_area.get_overlapping_areas()
 		for a in areas:

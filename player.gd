@@ -42,6 +42,13 @@ func knockback(direction:Vector2,strength:float):
 	var s = (0.1 * pow(strength,dmg) + 5*strength*dmg)
 	velocity += direction * s
 
+func knockback_friendly(direction:Vector2,strength:float):
+	if shield.visible:
+		return
+	var dmg = 40.0
+	var s = (0.1 * pow(strength,dmg) + 5*strength*dmg)
+	velocity += direction * s
+
 func _ready() -> void:
 	input_set = "player1" if player_one else "player2"
 	if player_one:

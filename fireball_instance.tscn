@@ -18,13 +18,13 @@ script = ExtResource("2_vad03")
 explosion_particle = ExtResource("3_uyh66")
 
 [node name="WorldArea2D" type="Area2D" parent="."]
+collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldArea2D"]
 position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_uyh66")
 
 [node name="PlayerArea2D" type="Area2D" parent="."]
-collision_layer = 8
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerArea2D"]
