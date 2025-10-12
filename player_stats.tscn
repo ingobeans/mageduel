@@ -14,8 +14,8 @@ anchors_preset = 0
 script = ExtResource("1_ak0f0")
 player1_portrait = ExtResource("2_lwsxu")
 player2_portrait = ExtResource("3_5dqri")
-names = Array[String](["Arcanius", "Wizo", "Magicman", "Dartendorten", "Huzza", "Proggler", "Maggie", "Orbler", "Huzza"])
-titles = Array[String](["of Magic", "of Devouring", "of the Underworld", "the Unwise", "the Blessed", "of Orbs"])
+names = Array[String](["Arcanius", "Wizo", "Magicman", "Dartendorten", "Huzza", "Proggler", "Maggie", "Orbler", "Huzza", "Limus"])
+titles = Array[String](["of Magic", "of Devouring", "of the Underworld", "the Unwise", "the Blessed", "of Orbs", "Maximus"])
 
 [node name="Card" type="ColorRect" parent="."]
 layout_mode = 0

@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://c7c6r8ec4vktb"]
+
+[ext_resource type="Texture2D" uid="uid://cs1fyuib1uvjv" path="res://assets/weapons/slash_down1.png" id="1_g6ky6"]
+[ext_resource type="Texture2D" uid="uid://78wn5hf0eei1" path="res://assets/weapons/slash_down2.png" id="2_yhlrr"]
+[ext_resource type="Texture2D" uid="uid://d3afgsfmhehy3" path="res://assets/weapons/slash_down3.png" id="3_iif8p"]
+[ext_resource type="Script" uid="uid://brcbsj48mauy4" path="res://slash.gd" id="4_w408d"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cjwdp"]
+animations = [{
+"frames": [{
+"duration": 0.41,
+"texture": ExtResource("1_g6ky6")
+}, {
+"duration": 0.11,
+"texture": ExtResource("2_yhlrr")
+}, {
+"duration": 0.21,
+"texture": ExtResource("3_iif8p")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_twb2h"]
+size = Vector2(46, 33)
+
+[node name="Slash" type="Area2D"]
+script = ExtResource("4_w408d")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-29, -26)
+sprite_frames = SubResource("SpriteFrames_cjwdp")
+autoplay = "default"
+frame_progress = 0.41095206
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-24, -10.5)
+shape = SubResource("RectangleShape2D_twb2h")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

@@ -1,7 +1,7 @@
 extends "res://weapon.gd"
 
 @export var projectile: PackedScene
-
+	
 func use(direction: Vector2):
 	var new = projectile.instantiate()
 	new.position = global_position

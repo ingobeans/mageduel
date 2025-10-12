@@ -6,6 +6,9 @@ var use_counter = 0.0
 
 func use(_direction: Vector2):
 	pass
+	
+func weapon_process(_delta:float):
+	pass
 
 func try_use(direction: Vector2)->bool:
 	if use_counter <= 0.0:
@@ -15,4 +18,5 @@ func try_use(direction: Vector2)->bool:
 	return false
 
 func _process(delta: float) -> void:
+	weapon_process(delta)
 	use_counter -= delta
